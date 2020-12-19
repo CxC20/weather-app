@@ -1,0 +1,51 @@
+body {
+  max-width: 90%;
+  margin: 0 auto;
+  background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+.form-control,
+.card {
+  background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
+}
+
+.form-control {
+  font-size: 18px;
+}
+.form-control:hover {
+  background: #fff;
+  cursor: pointer;
+}
+
+.card-body:hover {
+  background-image: linear-gradient(to top, #dfe9f3 0%, white 100%);
+  transition: all 200ms ease-in-out;
+}
+.day0-first {
+  font-size: 20px;
+}
+
+.day0-second,
+.day0-third {
+  font-weight: 500;
+  font-size: 36px;
+  margin: auto;
+}
+
+#temp-display {
+  margin: 0 auto;
+}
+#temp-unit {
+  font-size: 18px;
+  vertical-align: super;
+}
+
+div.days .card-title {
+  text-align: center;
+  font-size: 28px;
+}
+
+div.days .card-text {
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 18px;
+}
