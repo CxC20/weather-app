@@ -19,29 +19,19 @@
   </head>
   <body>
     <div class="container">
-      <form class="" id="form">
-        <div class="form-row align-items-center">
-          <div class="col-md-2 my-1">
-            <label for="city-input"></label>
-            <input
-              type="text"
-              class="form-control border border-secondary rounded-sm"
-              id="city-input"
-              placeholder="Search for city here..."
-              required
-            />
-          </div>
-          <div class="col-auto">
-            <button
-              type="submit"
-              class="btn btn-primary mb-2"
-              id="current-location"
-            >
-              Current Location
-            </button>
-          </div>
+      <form class="align-items-center" id="form">
+        <div class="form-group">
+          <label for="city-input"></label>
+          <input
+            type="text"
+            class="form-control border border-secondary rounded-sm"
+            id="city-input"
+            placeholder="Search for city here..."
+            required
+          />
         </div>
       </form>
+      <button id="current-location">Current Location</button>
       <div class="card border border-secondary rounded-sm">
         <div class="card-body">
           <div class="container">
@@ -116,7 +106,6 @@
           </div>
         </div>
       </div>
-
       <div class="card border border-secondary rounded-sm">
         <div class="card-footer">
           <small class="text">
