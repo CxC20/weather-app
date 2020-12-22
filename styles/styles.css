@@ -3,6 +3,11 @@ body {
   margin: 0 auto;
   background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
 }
+
+.form-inline {
+  margin-top: 1em;
+}
+
 .form-control,
 .card {
   background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
@@ -14,9 +19,11 @@ body {
 .form-control:hover {
   background: #fff;
   cursor: pointer;
+  transition: all 200ms ease-in-out;
 }
 
-.card-body:hover {
+.card-body:hover,
+.card-footer:hover {
   background-image: linear-gradient(to top, #dfe9f3 0%, white 100%);
   transition: all 200ms ease-in-out;
 }
@@ -39,13 +46,19 @@ body {
   vertical-align: super;
 }
 
-div.days .card-title {
+div.days .card-title,
+.card-footer {
   text-align: center;
   font-size: 28px;
 }
 
 div.days .card-text {
   text-transform: uppercase;
+  text-align: center;
+  font-size: 18px;
+}
+
+.card-footer {
   text-align: center;
   font-size: 18px;
 }
