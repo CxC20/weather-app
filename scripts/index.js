@@ -1,4 +1,5 @@
 let weatherApiKey = "802540f702d19dfc355b50bb670f1cc5";
+//let oneCallWeatherApiKey = "2204e2f50737e4cd706dca2096135d4e";
 
 function displayCurrentDay() {
   let today = new Date();
@@ -41,6 +42,8 @@ function displayCurrentDay() {
 function displayTime() {
   let today = new Date();
   let hour = today.getHours();
+  let minute = today.getMinutes();
+  console.log(minute);
   let m = "";
 
   if (hour === 0) {
@@ -50,8 +53,12 @@ function displayTime() {
     if (0 < hour && hour < 12) {
       m = "AM";
     } else {
-      hour = hour - 12;
-      m = "PM";
+      if (hour === 12) {
+        m = "PM";
+      } else {
+        hour = hour - 12;
+        m = "PM";
+      }
     }
   }
 
@@ -69,7 +76,9 @@ function pullPosition(position) {
   let lat = position.coords.latitude;
   let lon = position.coords.longitude;
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${weatherApiKey}&units=imperial`;
+  let forecastApiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${weatherApiKey}&units=imperial`;
   axios.get(apiUrl).then(displayWeather);
+  axios.get(forecastApiUrl).then(displayForecast);
 }
 
 function displayWeather(response) {
@@ -83,6 +92,32 @@ function displayWeather(response) {
   currentTempDisplay.innerHTML = temp;
 }
 
+function displayForecast(response) {
+  console.log(response);
+  let forecast = response.data.list[0];
+
+  let forecastDisplay = document.getElementById("forecast");
+  forecastDisplay.innerHTML = `
+  <div class="col mb-5">
+    <div class="card border border-secondary rounded-sm h-100 days day1">
+      <div class="card-body">
+        <h5 class="card-title">
+          <strong>${Math.round(forecast.main.temp_max)} ℉</strong> ${Math.round(
+    forecast.main.temp_min
+  )} ℉
+          <br />
+          <i class="far fa-sun"></i>
+        </h5>
+        <p class="card-text">
+          Tuesday
+          <br />
+          11/3
+        </p>
+      </div>
+    </div>
+  </div>`;
+}
+
 function weatherSearch(event) {
   event.preventDefault();
 
@@ -91,7 +126,9 @@ function weatherSearch(event) {
 
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${weatherApiKey}&units=imperial`;
 
+  let forecastApiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${weatherApiKey}&units=imperial`;
   axios.get(apiUrl).then(displayWeather);
+  axios.get(forecastApiUrl).then(displayForecast);
 }
 
 function fahrenheitToCelsius(event) {
@@ -135,6 +172,7 @@ function celsiusToFahrenheit(event) {
 window.addEventListener("load", displayCurrentDay);
 window.addEventListener("load", displayTime);
 window.addEventListener("load", displayCurrentLocation);
+window.addEventListener("load", displayForecast);
 
 let form = document.getElementById("form");
 form.addEventListener("submit", weatherSearch);

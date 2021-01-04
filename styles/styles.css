@@ -7,12 +7,10 @@ body {
 .form-inline {
   margin-top: 1em;
 }
-
 .form-control,
 .card {
   background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
 }
-
 .form-control {
   font-size: 18px;
 }
@@ -27,29 +25,71 @@ body {
   background-image: linear-gradient(to top, #dfe9f3 0%, white 100%);
   transition: all 200ms ease-in-out;
 }
-.day0-first {
-  font-size: 20px;
+
+.row-cols-4 .col {
+  margin: 0.5em 0;
+}
+
+#city-display {
+  display: inline-block;
+  vertical-align: -1.5em;
+  padding: 0.3em 0 0;
+}
+
+.weather-icon-description {
+  text-align: center;
+}
+.weather-icon {
+  font-size: 2.5em;
+}
+h6 {
+  display: inline-block;
+}
+
+.temperature-conversion {
+  text-align: left;
+}
+#current-temp,
+.temp-unit {
+  display: inline-block;
+  vertical-align: -45%;
+}
+#current-temp {
+  font-size: 3.5em;
+  vertical-align: top;
+}
+.temp-unit {
+  font-size: 1.2em;
+}
+
+.current-display {
+  font-size: 1.2em;
+  line-height: 1em;
+  padding: 0.5em 0 0;
+}
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+.weather-details {
+  padding: 0.5em 0 0;
+  margin: 0 auto;
+  text-align: left;
 }
 
 .day0-second,
 .day0-third {
   font-weight: 500;
   font-size: 36px;
-  margin: auto;
-}
-
-#temp-display {
   margin: 0 auto;
-}
-#temp-unit {
-  font-size: 18px;
-  vertical-align: super;
 }
 
 div.days .card-title,
 .card-footer {
   text-align: center;
   font-size: 28px;
+  font-weight: 400;
 }
 
 div.days .card-text {

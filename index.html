@@ -35,41 +35,48 @@
       <div class="card border border-secondary rounded-sm">
         <div class="card-body">
           <div class="container">
-            <div class="row day0">
-              <div class="col day0-first">
-                <div class="row-1" id="current-day"></div>
-                <div class="row-2" id="current-time"></div>
-                <div class="row-3" id="city-display"></div>
+            <div class="row row-cols-4">
+              <div class="col-6 city-display">
+                <h1 id="city-display"></h1>
               </div>
-              <div class="col-2 day0-second">
-                <i class="fas fa-cloud-sun"></i>
+              <div class="col weather-icon-description">
+                <div class="weather-icon"><i class="fas fa-cloud-sun"></i></div>
+                <h6>Partly Cloudy</h6>
               </div>
-              <div class="col-4 day0-third">
-                <div class="" id="temp-display">
-                  <span id="current-temp"></span>
-                  <span id="temp-unit">
-                    <span id="fahrenheit"><strong> ℉ </strong></span>|<span
-                      id="celsius"
-                      ><a href=""> ℃ </a></span
-                    >
-                  </span>
+              <div class="col temperature-conversion">
+                <h1 id="current-temp"></h1>
+                <div class="temp-unit">
+                  <span id="fahrenheit"><strong> ℉ </strong></span>|<span
+                    id="celsius"
+                    ><a href=""> ℃ </a></span
+                  >
                 </div>
+              </div>
+              <div class="col-6">
+                <h5>
+                  <ul class="current-display">
+                    <li id="current-day"></li>
+                    <li id="current-time"></li>
+                  </ul>
+                </h5>
+              </div>
+              <div class="col-6 weather-details">
+                <h6>
+                  <ul>
+                    <li>precipitation: 10%</li>
+                    <li>humidity: 50%</li>
+                    <li>wind speed: 2 mph</li>
+                  </ul>
+                </h6>
               </div>
             </div>
           </div>
         </div>
       </div>
+
       <br />
-      <div class="row row-cols-1 row-cols-md-5">
-        <div class="col mb-5">
-          <div class="card border border-secondary rounded-sm h-100 days day1">
-            <div class="card-body">
-              <h5 class="card-title">72℉<br /><i class="far fa-sun"></i></h5>
-              <p class="card-text">Tuesday<br />11/3</p>
-            </div>
-          </div>
-        </div>
-        <div class="col mb-5">
+      <div class="row row-cols-1 row-cols-md-5" id="forecast">
+        <!-- <div class="col mb-5">
           <div class="card border border-secondary rounded-sm h-100 days day2">
             <div class="card-body">
               <h5 class="card-title">70℉<br /><i class="far fa-sun"></i></h5>
@@ -104,12 +111,15 @@
               <p class="card-text">Saturday<br />11/7</p>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
       <div class="card border border-secondary rounded-sm">
         <div class="card-footer">
           <small class="text">
-            Link to <a href="https://github.com/CxC20/weather-app">GitHub</a>
+            Link to
+            <a href="https://github.com/CxC20/weather-app" target="_blank"
+              >GitHub</a
+            >
           </small>
         </div>
       </div>
