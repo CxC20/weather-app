@@ -43,7 +43,6 @@ function displayTime() {
   let today = new Date();
   let hour = today.getHours();
   let minute = today.getMinutes();
-  console.log(minute);
   let m = "";
 
   if (hour === 0) {
@@ -62,7 +61,11 @@ function displayTime() {
     }
   }
 
-  let currentTime = `${hour} ${m}`;
+  if (minute < 10) {
+    minute = `0${minute}`;
+  }
+
+  let currentTime = `${hour}:${minute} ${m}`;
   let currentTimeInner = document.getElementById("current-time");
   currentTimeInner.innerHTML = currentTime;
 }
@@ -78,45 +81,60 @@ function pullPosition(position) {
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${weatherApiKey}&units=imperial`;
   let forecastApiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${weatherApiKey}&units=imperial`;
   axios.get(apiUrl).then(displayWeather);
-  axios.get(forecastApiUrl).then(displayForecast);
+  // axios.get(forecastApiUrl).then(displayForecast);
 }
 
 function displayWeather(response) {
+  console.log(response.data);
   let city = response.data.name;
   let temp = Math.round(response.data.main.temp);
+  let weatherDescription = response.data.weather[0].main;
+  // let precipitation = ;
+  let humidity = response.data.main.humidity;
+  let windSpeed = response.data.wind.speed;
 
   let cityDisplay = document.getElementById("city-display");
   let currentTempDisplay = document.getElementById("current-temp");
+  let weatherDescriptionDisplay = document.getElementById(
+    "weather-description"
+  );
+  // let precipitationDisplay = document.getElementById("");
+  let humidityDisplay = document.getElementById("humidity");
+  let windSpeedDisplay = document.getElementById("windSpeed");
 
   cityDisplay.innerHTML = city;
   currentTempDisplay.innerHTML = temp;
+  weatherDescriptionDisplay.innerHTML = weatherDescription;
+  // precipitationDisplay = document.getElementById("");
+  humidityDisplay.innerHTML = `Humidity: ${humidity}%`;
+  windSpeedDisplay.innerHTML = `Wind Speed: ${Math.round(windSpeed)} mph`;
 }
 
-function displayForecast(response) {
-  console.log(response);
-  let forecast = response.data.list[0];
+// function displayForecast(response) {
+//   console.log(response);
+//   let forecast = response.data.list[0];
 
-  let forecastDisplay = document.getElementById("forecast");
-  forecastDisplay.innerHTML = `
-  <div class="col mb-5">
-    <div class="card border border-secondary rounded-sm h-100 days day1">
-      <div class="card-body">
-        <h5 class="card-title">
-          <strong>${Math.round(forecast.main.temp_max)} ℉</strong> ${Math.round(
-    forecast.main.temp_min
-  )} ℉
-          <br />
-          <i class="far fa-sun"></i>
-        </h5>
-        <p class="card-text">
-          Tuesday
-          <br />
-          11/3
-        </p>
-      </div>
-    </div>
-  </div>`;
-}
+//   let forecastDisplay = document.getElementById("forecast");
+//   forecastDisplay.innerHTML = `
+//   <div class="col mb-5">
+//     <div class="card border border-secondary rounded-sm h-100 days day1">
+//       <div class="card-body">
+//         <h5 class="card-title">
+//           <strong>${Math.round(forecast.main.temp_max)}° </strong> ${Math.round(
+//     forecast.main.temp_min
+//   )}°
+//           <br />
+//           <i class="far fa-sun"></i>
+//         </h5>
+//         <p class="card-text">
+//           Tuesday
+//           <br />
+//           11/3
+//         </p>
+//       </div>
+//     </div>
+//   </div>`;
+// }
 
 function weatherSearch(event) {
   event.preventDefault();
@@ -172,7 +190,7 @@ function celsiusToFahrenheit(event) {
 window.addEventListener("load", displayCurrentDay);
 window.addEventListener("load", displayTime);
 window.addEventListener("load", displayCurrentLocation);
-window.addEventListener("load", displayForecast);
+// window.addEventListener("load", displayForecast);
 
 let form = document.getElementById("form");
 form.addEventListener("submit", weatherSearch);
