@@ -86,14 +86,9 @@ function pullPosition(position) {
 
 function displayWeather(response) {
   console.log(response.data);
-  let city = response.data.name;
-  let temp = Math.round(response.data.main.temp);
-  let weatherDescription = response.data.weather[0].main;
-  // let precipitation = ;
-  let humidity = response.data.main.humidity;
-  let windSpeed = response.data.wind.speed;
 
   let cityDisplay = document.getElementById("city-display");
+  let weatherIconDisplay = document.getElementById("weather-icon");
   let currentTempDisplay = document.getElementById("current-temp");
   let weatherDescriptionDisplay = document.getElementById(
     "weather-description"
@@ -102,12 +97,18 @@ function displayWeather(response) {
   let humidityDisplay = document.getElementById("humidity");
   let windSpeedDisplay = document.getElementById("windSpeed");
 
-  cityDisplay.innerHTML = city;
-  currentTempDisplay.innerHTML = temp;
-  weatherDescriptionDisplay.innerHTML = weatherDescription;
-  // precipitationDisplay = document.getElementById("");
-  humidityDisplay.innerHTML = `Humidity: ${humidity}%`;
-  windSpeedDisplay.innerHTML = `Wind Speed: ${Math.round(windSpeed)} mph`;
+  cityDisplay.innerHTML = response.data.name;
+  weatherIconDisplay.setAttribute(
+    "src",
+    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+  );
+  currentTempDisplay.innerHTML = Math.round(response.data.main.temp);
+  weatherDescriptionDisplay.innerHTML = response.data.weather[0].description;
+  // precipitationDisplay.innerHTML = ;
+  humidityDisplay.innerHTML = `Humidity: ${response.data.main.humidity}%`;
+  windSpeedDisplay.innerHTML = `Wind Speed: ${Math.round(
+    response.data.wind.speed
+  )} mph`;
 }
 
 // function displayForecast(response) {
