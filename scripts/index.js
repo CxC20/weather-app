@@ -73,6 +73,8 @@ function displayTime() {
 function displayCurrentLocation(event) {
   event.preventDefault();
   navigator.geolocation.getCurrentPosition(pullPosition);
+
+  celsiusToFahrenheit(event);
 }
 
 function pullPosition(position) {
@@ -97,9 +99,11 @@ function displayWeather(response) {
   let humidityDisplay = document.getElementById("humidity");
   let windSpeedDisplay = document.getElementById("windSpeed");
 
+  fahrenheitDisplay = Math.round(response.data.main.temp);
+
   cityDisplay.innerHTML = response.data.name;
   weatherIconDisplay.innerHTML = `<img src="http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png" />`;
-  currentTempDisplay.innerHTML = Math.round(response.data.main.temp);
+  currentTempDisplay.innerHTML = fahrenheitDisplay;
   weatherDescriptionDisplay.innerHTML = response.data.weather[0].description;
   // precipitationDisplay.innerHTML = ;
   humidityDisplay.innerHTML = `Humidity: ${response.data.main.humidity}%`;
@@ -144,22 +148,19 @@ function weatherSearch(event) {
 
   let forecastApiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${weatherApiKey}&units=imperial`;
   axios.get(apiUrl).then(displayWeather);
-  axios.get(forecastApiUrl).then(displayForecast);
+  // axios.get(forecastApiUrl).then(displayForecast);
 }
 
 function fahrenheitToCelsius(event) {
   event.preventDefault();
 
   let currentTemp = document.getElementById("current-temp");
-  let fahrenheitTemp = currentTemp.innerText;
-
-  let celsiusTemp = Math.round((fahrenheitTemp - 32) * (5 / 9));
+  let celsiusTemp = Math.round((fahrenheitDisplay - 32) * (5 / 9));
 
   currentTemp.innerHTML = celsiusTemp;
 
   let fahrenheit = document.getElementById("fahrenheit");
   fahrenheit.innerHTML = "<a href=''> ℉ </a>";
-
   let celsius = document.getElementById("celsius");
   celsius.innerHTML = "<strong> ℃ </strong>";
 
@@ -170,15 +171,11 @@ function celsiusToFahrenheit(event) {
   event.preventDefault();
 
   let currentTemp = document.getElementById("current-temp");
-  let celsiusTemp = currentTemp.innerText;
 
-  let fahrenheitTemp = Math.round(celsiusTemp * (9 / 5) + 32);
-
-  currentTemp.innerHTML = fahrenheitTemp;
+  currentTemp.innerHTML = fahrenheitDisplay;
 
   let celsius = document.getElementById("celsius");
   celsius.innerHTML = "<a href=''> ℃ </a>";
-
   let fahrenheit = document.getElementById("fahrenheit");
   fahrenheit.innerHTML = "<strong> ℉ </strong>";
 
@@ -195,6 +192,8 @@ form.addEventListener("submit", weatherSearch);
 
 let button = document.getElementById("current-location");
 button.addEventListener("click", displayCurrentLocation);
+
+let fahrenheitDisplay = null;
 
 let celsius = document.getElementById("celsius");
 celsius.addEventListener("click", fahrenheitToCelsius);
