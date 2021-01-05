@@ -39,10 +39,13 @@ function displayCurrentDay() {
   currentDayInner.innerHTML = currentDay;
 }
 
-function displayTime() {
-  let today = new Date();
-  let hour = today.getHours();
-  let minute = today.getMinutes();
+function displayTime(date) {
+  console.log(date);
+
+  let hour = date.getHours();
+  console.log(hour);
+  let minute = date.getMinutes();
+  console.log(minute);
   let m = "";
 
   if (hour === 0) {
@@ -83,11 +86,22 @@ function pullPosition(position) {
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${weatherApiKey}&units=imperial`;
   let forecastApiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${weatherApiKey}&units=imperial`;
   axios.get(apiUrl).then(displayWeather);
+  axios.get(apiUrl).then(updateTime);
   // axios.get(forecastApiUrl).then(displayForecast);
 }
 
 function displayWeather(response) {
   console.log(response.data);
+
+  cityDisplayTimeZone = response.data.timezone;
+  let updatedUTCTime = response.data.dt + localTimeZone + cityDisplayTimeZone;
+  console.log(new Date(updatedUTCTime * 1000));
+
+  if (localTimeZone + cityDisplayTimeZone === 0) {
+    displayTime(new Date());
+  } else {
+    displayTime(new Date(updatedUTCTime * 1000));
+  }
 
   let cityDisplay = document.getElementById("city-display");
   let weatherIconDisplay = document.getElementById("weather-icon");
@@ -148,6 +162,7 @@ function weatherSearch(event) {
 
   let forecastApiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${weatherApiKey}&units=imperial`;
   axios.get(apiUrl).then(displayWeather);
+  axios.get(apiUrl).then(updateTime);
   // axios.get(forecastApiUrl).then(displayForecast);
 }
 
@@ -183,17 +198,19 @@ function celsiusToFahrenheit(event) {
 }
 
 window.addEventListener("load", displayCurrentDay);
-window.addEventListener("load", displayTime);
+window.addEventListener("load", displayTime(new Date()));
 window.addEventListener("load", displayCurrentLocation);
 // window.addEventListener("load", displayForecast);
+
+let fahrenheitDisplay = null;
+let localTimeZone = new Date().getTimezoneOffset() * 60;
+console.log(localTimeZone);
 
 let form = document.getElementById("form");
 form.addEventListener("submit", weatherSearch);
 
 let button = document.getElementById("current-location");
 button.addEventListener("click", displayCurrentLocation);
-
-let fahrenheitDisplay = null;
 
 let celsius = document.getElementById("celsius");
 celsius.addEventListener("click", fahrenheitToCelsius);
