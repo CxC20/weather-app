@@ -98,10 +98,7 @@ function displayWeather(response) {
   let windSpeedDisplay = document.getElementById("windSpeed");
 
   cityDisplay.innerHTML = response.data.name;
-  weatherIconDisplay.setAttribute(
-    "src",
-    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
-  );
+  weatherIconDisplay.innerHTML = `<img src="http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png" />`;
   currentTempDisplay.innerHTML = Math.round(response.data.main.temp);
   weatherDescriptionDisplay.innerHTML = response.data.weather[0].description;
   // precipitationDisplay.innerHTML = ;
