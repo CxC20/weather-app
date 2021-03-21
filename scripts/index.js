@@ -85,6 +85,7 @@ function pullPosition(position) {
   let lon = position.coords.longitude;
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${weatherApiKey}&units=imperial`;
   let forecastApiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${weatherApiKey}&units=imperial`;
+
   axios.get(apiUrl).then(displayWeather);
   axios.get(apiUrl).then(updateTime);
   // axios.get(forecastApiUrl).then(displayForecast);
@@ -140,7 +141,7 @@ function displayWeather(response) {
 //     forecast.main.temp_min
 //   )}°
 //           <br />
-//           <i class="far fa-sun"></i>
+//           <img src="http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png" />
 //         </h5>
 //         <p class="card-text">
 //           Tuesday
@@ -159,8 +160,8 @@ function weatherSearch(event) {
   let city = cityInput.value.trim().toLowerCase();
 
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${weatherApiKey}&units=imperial`;
-
   let forecastApiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${weatherApiKey}&units=imperial`;
+
   axios.get(apiUrl).then(displayWeather);
   axios.get(apiUrl).then(updateTime);
   // axios.get(forecastApiUrl).then(displayForecast);

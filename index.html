@@ -19,6 +19,26 @@
   </head>
   <body>
     <div class="container">
+      <form class="row">
+        <div class="col-6">
+          <input
+            type="text"
+            class="form-control border border-secondary rounded-sm"
+            id="city-input"
+            placeholder="Search for city here..."
+            required
+          />
+        </div>
+        <div class="col-auto">
+          <button
+            type="submit"
+            id="current-location"
+            class="btn btn-primary mb-3"
+          >
+            Current Location
+          </button>
+        </div>
+      </form>
       <form class="align-items-center" id="form">
         <div class="form-group">
           <label for="city-input"></label>
@@ -29,6 +49,9 @@
             placeholder="Search for city here..."
             required
           />
+        </div>
+        <div class="col-12">
+          <button type="submit" class="btn btn-primary">Sign in</button>
         </div>
       </form>
       <button id="current-location">Current Location</button>
