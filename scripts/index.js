@@ -122,6 +122,7 @@ function displayWeather(response) {
   weatherDescriptionDisplay.innerHTML = response.data.weather[0].description;
   // precipitationDisplay.innerHTML = ;
   humidityDisplay.innerHTML = `Humidity: ${response.data.main.humidity}%`;
+  console.log(response.data);
   windSpeedDisplay.innerHTML = `Wind Speed: ${Math.round(
     response.data.wind.speed
   )} mph`;
