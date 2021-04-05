@@ -161,6 +161,7 @@ function weatherSearch(event) {
   let city = cityInput.value.trim().toLowerCase();
 
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${weatherApiKey}&units=imperial`;
+
   let forecastApiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${weatherApiKey}&units=imperial`;
 
   axios.get(apiUrl).then(displayWeather);
